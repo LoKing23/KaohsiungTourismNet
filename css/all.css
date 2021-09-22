@@ -30,7 +30,7 @@ img {
 }
 
 .container {
-  width: 994px;
+  max-width: 994px;
   padding-left: 30px;
   padding-right: 30px;
   margin-left: auto;
@@ -44,7 +44,7 @@ img {
 .dashline-img-middle {
   margin-left: auto;
   margin-right: auto;
-  width: 900px;
+  max-width: 900px;
   border-bottom: 1px dashed #559AC8;
   position: relative;
 }
@@ -71,7 +71,8 @@ small {
 .bg {
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  height: 380px;
+  width: 100%;
+  height: auto;
 }
 
 .bg-primary {
@@ -119,7 +120,7 @@ small {
 }
 
 .form-select {
-  width: 450px;
+  width: 70%;
   height: 45px;
   border: 3px solid #fff;
   background: rgba(255, 255, 255, 0.7);
@@ -193,7 +194,7 @@ small {
 }
 
 .hotArea {
-  width: 800px;
+  width: 66%;
   margin-left: auto;
   margin-right: auto;
   padding-top: 20px;
@@ -220,6 +221,8 @@ small {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   padding: 16px;
 }
 
@@ -227,8 +230,15 @@ small {
   margin-right: 16px;
 }
 
+@media (max-width: 375px) {
+  .btn-group .btn {
+    width: 100%;
+  }
+}
+
 .btn {
   padding: 11px 34px;
+  text-align: center;
   font-size: 20px;
   cursor: pointer;
   border-radius: 5px;
