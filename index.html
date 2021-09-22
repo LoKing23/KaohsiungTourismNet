@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>帥哥回來到</title>
+  <link rel="stylesheet" href="css/all.css">
+  <!-- 導入axios/fontAwesome  -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://kit.fontawesome.com/3a056adcda.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- banner -->
+  <div class="bg text-center" style="background-image: url(https://hexschool.github.io/JavaScript_HomeWork/assets/the-urban-landscape-1698285.png);">
+    <h1 class="text-white test">高雄旅遊網</h1>
+    <select class="form-select area-select" name="area" id="">
+      <option>- - 請選擇行政區 </option>
+      <option value="苓雅區">苓雅區</option>
+      <option value="三民區">三民區</option>
+      <option value="新興區">新興區</option>
+      <option value="鹽埕區">鹽埕區</option>
+    </select>
+  </div>
+  <!-- 熱門行政區/虛線區 -->
+  <div class="mb-9">
+    <div class="hotArea mb-6">
+      <h2 class="fw-bold fz-md">熱門行政區</h2>
+      <ul class="btn-group">
+        <li class="btn btn-dogshit">苓雅區</li>
+        <li class="btn btn-danger">三民區</li>
+        <li class="btn btn-alert">新興區</li>
+        <li class="btn btn-primary">鹽埕區</li>
+      </ul>
+    </div>
+    <div class="dashline-img-middle">
+      <img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_down.png" alt="">
+    </div>
+  </div>
+  <!-- main/card-group -->
+  <main class="container mb-6">
+    <h2 class="card-area"></h2>
+    <div class="card-group">
+
+
+
+      <div data-num = "0" class="card">
+        <div class="card-bg" style="background-image: url(https://khh.travel/image/1654/640x480);">
+          <h2 class="title">高雄願景館</h2>
+          <p>三民區</p>
+        </div>
+        <div class="card-body d-flex"> 
+          <ul class="w-75 list-group">
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_clock.png" alt="">週二至週日10:00-18:00，每週一公休</p>
+            </li>
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_pin.png" alt="">高雄市三民區建國二路318號</p>
+            </li>
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_phone.png" alt="">886-7-2363357</p>
+            </li>
+          </ul>
+          <div class="w-25 position-relative ">
+            <p class="position-absolute bottom-0"><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_tag.png" alt="">免費參觀</p>
+          </div>    
+        </div>
+      </div>
+
+
+
+
+      <div data-num = "1" class="card">
+        <div class="card-bg" style="background-image: url(https://khh.travel/image/1654/640x480);">
+          <h2 class="title">高雄願景館</h2>
+          <p>三民區</p>
+        </div>
+        <div class="card-body d-flex"> 
+          <ul class="w-75 list-group">
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_clock.png" alt="">週二至週日10:00-18:00，每週一公休</p>
+            </li>
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_pin.png" alt="">高雄市三民區建國二路318號</p>
+            </li>
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_phone.png" alt="">886-7-2363357</p>
+            </li>
+          </ul>
+          <div class="w-25 position-relative ">
+            <p class="position-absolute bottom-0"><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_tag.png" alt="">免費參觀</p>
+          </div>    
+        </div>
+      </div>
+
+      <div data-num = "2" class="card">
+        <div class="card-bg" style="background-image: url(https://khh.travel/image/1654/640x480);">
+          <h2 class="title">高雄願景館</h2>
+          <p>三民區</p>
+        </div>
+        <div class="card-body d-flex"> 
+          <ul class="w-75 list-group">
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_clock.png" alt="">週二至週日10:00-18:00，每週一公休</p>
+            </li>
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_pin.png" alt="">高雄市三民區建國二路318號</p>
+            </li>
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_phone.png" alt="">886-7-2363357</p>
+            </li>
+          </ul>
+          <div class="w-25 position-relative ">
+            <p class="position-absolute bottom-0"><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_tag.png" alt="">免費參觀</p>
+          </div>    
+        </div>
+      </div>
+
+      <div data-num = "3" class="card">
+        <div class="card-bg" style="background-image: url(https://khh.travel/image/1654/640x480);">
+          <h2 class="title">高雄願景館</h2>
+          <p>三民區</p>
+        </div>
+        <div class="card-body d-flex"> 
+          <ul class="w-75 list-group">
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_clock.png" alt="">週二至週日10:00-18:00，每週一公休</p>
+            </li>
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_pin.png" alt="">高雄市三民區建國二路318號</p>
+            </li>
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_phone.png" alt="">886-7-2363357</p>
+            </li>
+          </ul>
+          <div class="w-25 position-relative ">
+            <p class="position-absolute bottom-0"><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_tag.png" alt="">免費參觀</p>
+          </div>    
+        </div>
+      </div>
+
+      <div data-num = "4" class="card">
+        <div class="card-bg" style="background-image: url(https://khh.travel/image/1654/640x480);">
+          <h2 class="title">高雄願景館</h2>
+          <p>三民區</p>
+        </div>
+        <div class="card-body d-flex"> 
+          <ul class="w-75 list-group">
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_clock.png" alt="">週二至週日10:00-18:00，每週一公休</p>
+            </li>
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_pin.png" alt="">高雄市三民區建國二路318號</p>
+            </li>
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_phone.png" alt="">886-7-2363357</p>
+            </li>
+          </ul>
+          <div class="w-25 position-relative ">
+            <p class="position-absolute bottom-0"><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_tag.png" alt="">免費參觀</p>
+          </div>    
+        </div>
+      </div>
+
+      <div data-num = "5" class="card">
+        <div class="card-bg" style="background-image: url(https://khh.travel/image/1654/640x480);">
+          <h2 class="title">高雄願景館</h2>
+          <p>三民區</p>
+        </div>
+        <div class="card-body d-flex"> 
+          <ul class="w-75 list-group">
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_clock.png" alt="">週二至週日10:00-18:00，每週一公休</p>
+            </li>
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_pin.png" alt="">高雄市三民區建國二路318號</p>
+            </li>
+            <li>
+              <p><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_phone.png" alt="">886-7-2363357</p>
+            </li>
+          </ul>
+          <div class="w-25 position-relative ">
+            <p class="position-absolute bottom-0"><img src="https://hexschool.github.io/JavaScript_HomeWork/assets/icons_tag.png" alt="">免費參觀</p>
+          </div>    
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+ 
+    <ul class="pagination mb-3">
+      <li><i class="fas fa-angle-left"></i></li>
+      <li class="active">1</li>
+      <li><i class="fas fa-angle-right"></i></li>
+    </ul>
+
+  <!-- footer  -->
+  <footer class="bg-primary text-center p-3">
+    <small class="text-white mb-2">高雄旅遊網</small> <br>
+    <small class="text-alert">資料來源：高雄市政府 </small>
+  </footer>
+
+  <script src="js/all.js"></script>
+</body>
+</html>
