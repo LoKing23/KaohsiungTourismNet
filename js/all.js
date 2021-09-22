@@ -24,7 +24,6 @@ function mapData(area){
   }
   return obj;
 }
-let a = mapData('鳳山區');
 //2 算出每個頁面要顯示的陣列範圍
 function getRangeFromData(data,displayPage = 1,displayData = 6){
   let dataLen = data.length;
@@ -50,10 +49,11 @@ function getRangeFromData(data,displayPage = 1,displayData = 6){
 }
 //view 
 //1 取出陣列資料並顯示於畫面上
-function renderCardGroup(obj,displayData = 6,displayPage = 1){
+function renderCardGroup(obj,displayPage = 1,displayData = 6){
+  obj = mapData(obj);
   const newData = obj.newData;
 
-  const displayRange = getRangeFromData(newData,displayData,displayPage);
+  const displayRange = getRangeFromData(newData,displayPage,displayData);
   const firstData = displayRange[0];
   const endData = displayRange[1];
 
@@ -96,12 +96,35 @@ function renderCardGroup(obj,displayData = 6,displayPage = 1){
   const cardGroup = document.querySelector('.card-group');
   cardGroup.innerHTML = str;
 }
-let test = mapData('三民區');
-renderCardGroup(test,2,7);
+//2 作出相應pagination
+function renderPagination(obj,displayPage = 1,displayData = 6){
+  obj = mapData(obj);
+  let newData = obj.newData;
+  let dataLen = newData.length;
 
+  const displayRange = getRangeFromData(newData,displayPage,displayData);
+  const firstData = displayRange[0];
+  let activePage = (firstData/displayData) + 1
 
+  let totalPage = null;
+  if(dataLen%displayData!=0){
+    totalPage = (dataLen/displayData)+1;
+  }else{
+    totalPage = dataLen/displayData;
+  }
 
+  let str = ``;
+  str += `<li data-page = "pre"><i data-page="pre" class="fas fa-angle-left"></i></li>`;
+  for(let i=1;i<totalPage+1;i++){
+    str += `<li data-page = "${i}">${i}</li>`;
+  }
+  str += `<li data-page = "next" ><i data-page="next" class="fas fa-angle-right"></i></li>`
+  const pagination = document.querySelector('.pagination');
+  pagination.innerHTML = str;
 
+  const li = document.querySelectorAll('.pagination li');
+  li[activePage].setAttribute('class','active');
+}
 
 
 
@@ -110,18 +133,45 @@ renderCardGroup(test,2,7);
 const areaSelector = document.querySelector('.area-select');
 areaSelector.addEventListener('change',function(e){
   const area = e.target.value;
+  renderCardGroup(area);
+  renderPagination(area);
 });
 //2.btn click事件
 const btnGroup = document.querySelector('.btn-group');
 btnGroup.addEventListener('click',function(e){
   if(e.target.nodeName != 'LI'){return};
   const area = e.target.textContent;
-  console.log(area);
+  renderCardGroup(area);
+  renderPagination(area);
+})
+//3. pagination選擇事件
+const pagination = document.querySelector('.pagination');
+pagination.addEventListener('click',function(e){
+  const area = document.querySelector('.card-area').textContent;
+  const clickPage = e.target.dataset.page;
+  const nowPage = document.querySelector('.pagination .active').dataset.page;
+  const paginationGroup = document.querySelectorAll('.pagination li');
+  const lastPage = nowPage + 1;
+  const nowPageIsLastPage = paginationGroup.length == nowPage;  
+  
+  let str = "";
+  str =`
+  area = ${area},
+  clickPage = ${clickPage},
+  nowPage = ${nowPage},
+  paginationGroup = ${paginationGroup},
+
+  `
+  if(clickPage == 'pre' || nowPage != 1){
+    renderCardGroup(area,nowPage-1);
+    renderPagination(area,nowPage-1);
+  }else if(clickPage == 'next' || !nowPageIsLastPage ){
+    renderCardGroup(area,nowPage+1);
+    renderPagination(area,nowPage+1);
+  }else{
+    renderCardGroup(area,clickPage);
+    renderPagination(area,clickPage);
+  }
 })
 
-
-const card = document.querySelector('.card-group');
-card.addEventListener('click',function(e){
-  console.log(e.target.dataset.pig);
-})
 

@@ -148,6 +148,9 @@ small{
 .p-3{
   padding: 24px;
 }
+.pt-5{
+  padding-top: 40px;
+}
 .ms-2{
   margin-left: 16px;
 }
@@ -253,8 +256,12 @@ small{
     cursor: pointer;
     border: 1px solid var(--border);
     margin-left: -1px;
+    &:hover{
+      background-color: aqua;
+    }
+    &.active{
+      background-color: rgb(248, 168, 38);
+    }
   }
-  .active{
-    background-color: rgb(248, 168, 38);
-  }
+  
 }
