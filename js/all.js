@@ -30,13 +30,13 @@ function getRangeFromData(data,displayPage = 1,displayData = 6){
   let firstData = null;
   let endData = null;
   const displayRange = [];
-  let lastPage = Math.floor(dataLen/displayData);
+  let lastPage = Math.ceil(dataLen/displayData);
   let lastPageIsFloat = dataLen%displayData > 0;
-  if(typeof(displayPage) !== 'number' || displayPage < 1 || displayPage-1 > lastPage || displayPage % 1 !== 0){
+  if(typeof(displayPage) !== 'number' || displayPage < 1 || displayPage > lastPage || displayPage % 1 !== 0){
     firstData = 0;
     endData = displayData;
-  }else if(lastPage === (displayPage-1) && lastPageIsFloat){
-    firstData = displayData * lastPage;
+  }else if(lastPage === displayPage && lastPageIsFloat){
+    firstData = (lastPage-1) * displayData;
     endData = dataLen;
     console.log(lastPage === displayPage-1);
   }else{
@@ -56,12 +56,11 @@ function renderCardGroup(obj,displayPage = 1,displayData = 6){
   const displayRange = getRangeFromData(newData,displayPage,displayData);
   const firstData = displayRange[0];
   const endData = displayRange[1];
-
   let area = obj.area;
   const groupTitle =  document.querySelector('.card-area');
   groupTitle.textContent = area;
-
-  let str = ""
+  
+  let str = "";
   for(let i=firstData ;i<endData ;i++){
     let name = newData[i].Name;
     let opentime = newData[i].Opentime;
@@ -108,13 +107,14 @@ function renderPagination(obj,displayPage = 1,displayData = 6){
 
   let totalPage = null;
   if(dataLen%displayData!=0){
-    totalPage = (dataLen/displayData)+1;
+    totalPage = Math.ceil(dataLen/displayData);
   }else{
     totalPage = dataLen/displayData;
   }
 
   let str = ``;
   str += `<li data-page = "pre"><i data-page="pre" class="fas fa-angle-left"></i></li>`;
+
   for(let i=1;i<totalPage+1;i++){
     str += `<li data-page = "${i}">${i}</li>`;
   }
@@ -147,31 +147,31 @@ btnGroup.addEventListener('click',function(e){
 //3. pagination選擇事件
 const pagination = document.querySelector('.pagination');
 pagination.addEventListener('click',function(e){
+  
+
   const area = document.querySelector('.card-area').textContent;
+
   const clickPage = e.target.dataset.page;
-  const nowPage = document.querySelector('.pagination .active').dataset.page;
+  const nowPage = +document.querySelector('.pagination .active').dataset.page;
   const paginationGroup = document.querySelectorAll('.pagination li');
   const lastPage = nowPage + 1;
-  const nowPageIsLastPage = paginationGroup.length == nowPage;  
-  
-  let str = "";
-  str =`
-  area = ${area},
-  clickPage = ${clickPage},
-  nowPage = ${nowPage},
-  paginationGroup = ${paginationGroup},
+  const nowPageIsLastPage = paginationGroup.length-2 == nowPage;  
 
-  `
-  if(clickPage == 'pre' || nowPage != 1){
+  if(clickPage == 'pre' && nowPage != 1){
     renderCardGroup(area,nowPage-1);
     renderPagination(area,nowPage-1);
-  }else if(clickPage == 'next' || !nowPageIsLastPage ){
+    console.log(1);
+  }else if(clickPage == 'next' && !nowPageIsLastPage ){
     renderCardGroup(area,nowPage+1);
     renderPagination(area,nowPage+1);
-  }else{
-    renderCardGroup(area,clickPage);
-    renderPagination(area,clickPage);
+    console.log(2);
+  }else if(!isNaN(clickPage)){
+    renderCardGroup(area,+clickPage);
+    renderPagination(area,+clickPage);
+    console.log(3);
   }
 })
 
+renderCardGroup('苓雅區');
+renderPagination('苓雅區');
 
