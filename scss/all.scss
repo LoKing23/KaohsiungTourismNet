@@ -64,12 +64,10 @@ small{
 }
 .bg{
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
+  background-position: center;
   width: 100%;
-  height: auto;
-  // position: relative;
-  // z-index: -200;
-
+  height: 400px;
 }
 .bg-primary{
   background-color: #559AC8;

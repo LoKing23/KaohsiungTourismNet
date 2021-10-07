@@ -70,9 +70,10 @@ small {
 
 .bg {
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
+  background-position: center;
   width: 100%;
-  height: auto;
+  height: 400px;
 }
 
 .bg-primary {
