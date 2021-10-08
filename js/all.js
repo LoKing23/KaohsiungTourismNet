@@ -155,16 +155,66 @@ function renderPagination(obj,displayPage = 1,displayData = 6){
   const li = document.querySelectorAll('.pagination li');
   li[activePage].setAttribute('class','active');
 }
-function renderSelector(){
+//3 篩出區域並塞進selector
+function renderSelector(selected="苓雅區"){
   const selector = document.querySelector('select');
   const area = getAllAddressOfFilter();
-  let str = `<option>- - 請選擇行政區 </option>`;
+  let str = ``;
   area.forEach(element => {
+    if(element == selected){
+      str += `<option value="${element}" selected>${element}</option>` 
+      return
+    };
     str += `<option value="${element}">${element}</option>`
   });
   selector.innerHTML = str;
 }
+//4 秀全部btn
+function renderAllBtn(){
+  const area = getAllAddressOfFilter();
+  const btns = document.querySelectorAll('.btn-group .btn');
+  const btnGroup = document.querySelector('.btn-group');
+  const nowArea = [];
+  btns.forEach(e=>{nowArea.push(e.textContent)});
+  // 篩掉現有區域（hot area）
+  area.forEach((el, index, arr)=>{
+    let findResult = nowArea.findIndex(item=> item == el);
+    if(findResult !== -1){
+      arr.splice(index,1);
+    }
+  })
+  
+  area.forEach((el, index) => {
+    let li = document.createElement('li');
+    let textNode = document.createTextNode(el);
+    switch (index%4){
+      case 0:
+        li.classList.add('btn','btn-dogshit');
+        break;
+      case 1:
+        li.classList.add('btn','btn-danger');
+        break;
+      case 2:
+        li.classList.add('btn','btn-alert');
+        break;
+      case 3:
+        li.classList.add('btn','btn-primary');
+        break;
+    }
+    li.appendChild(textNode);
+    btnGroup.appendChild(li);
+  })
 
+}
+//5 收合btn至四個
+function renderHotArea(){
+  const btnGroup = document.querySelector('.btn-group');
+  const dashline = document.querySelector('.dashline-img-middle');
+  const btnGroupLen = btnGroup.children.length;
+  for(let i = btnGroupLen - 1; i > 3 ;i--){
+    btnGroup.removeChild(btnGroup.children[i]);
+  }
+}
 
 //事件
 //1.select change事件
@@ -183,7 +233,6 @@ btnGroup.addEventListener('click',function(e){
   renderCardGroup(area);
   renderPagination(area);
   selector.value = area;
-
 })
 //3. pagination選擇事件
 const pagination = document.querySelector('.pagination');
@@ -211,6 +260,23 @@ pagination.addEventListener('click',function(e){
     renderPagination(area,+clickPage);
     console.log(3);
   }
+})
+
+//4. 下拉btn事件
+const dashlineImg = document.querySelector('.dashline-img-middle img');
+dashlineImg.addEventListener('click',function(e){
+  
+  const btnGroup = document.querySelector('.btn-group');
+  if(btnGroup.classList.contains('open')){
+    btnGroup.classList.toggle('open');
+    renderHotArea();
+    return;
+  }else{
+    btnGroup.classList.toggle('open');
+    renderAllBtn();
+  }
+  
+
 })
 
 
