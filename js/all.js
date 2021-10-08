@@ -7,13 +7,13 @@ const dataInfo = [];
     let data = JSON.parse(this.responseText);
     let mainData = data.data.XML_Head.Infos.Info;
     dataInfo.push(...mainData);
-    console.log(dataInfo);
     init();
   }
 })()
 function init(){
   renderCardGroup('苓雅區');
   renderPagination('苓雅區');
+  renderSelector();
 }
 
 // 選擇行政區(selector/button)->data挑出該行政區組成陣列->從陣列中挑出需用資料（景點名稱-Name、行政區（用filter()撈Add符合行政區)、開館時間-Opentime、地址Add、電話Tel）->根據數量組成最多六個景點其他要點擊下一頁時替換
@@ -59,6 +59,23 @@ function getRangeFromData(data,displayPage = 1,displayData = 6){
   displayRange.push(firstData);
   displayRange.push(endData);
   return displayRange;
+}
+//3 將 data住址內有包含xx區的住址撈出來，形成一個陣列
+function getAllAddressOfFilter(){
+  // 住址 dataInfo[x].add
+  let pureAddress;
+  pureAddress = dataInfo.reduce((total, data, index)=>{
+    
+    let str = data.Add.split('');
+    str.splice(0,6);
+    str.length = 3;
+    str = str.join('');
+    
+    if(total.includes(str)){return total}
+    total.push(str);
+    return total;
+  },[])
+  return pureAddress;
 }
 //view 
 //1 取出陣列資料並顯示於畫面上
@@ -138,7 +155,15 @@ function renderPagination(obj,displayPage = 1,displayData = 6){
   const li = document.querySelectorAll('.pagination li');
   li[activePage].setAttribute('class','active');
 }
-
+function renderSelector(){
+  const selector = document.querySelector('select');
+  const area = getAllAddressOfFilter();
+  let str = `<option>- - 請選擇行政區 </option>`;
+  area.forEach(element => {
+    str += `<option value="${element}">${element}</option>`
+  });
+  selector.innerHTML = str;
+}
 
 
 //事件
@@ -154,8 +179,11 @@ const btnGroup = document.querySelector('.btn-group');
 btnGroup.addEventListener('click',function(e){
   if(e.target.nodeName != 'LI'){return};
   const area = e.target.textContent;
+  const selector = document.querySelector('select');
   renderCardGroup(area);
   renderPagination(area);
+  selector.value = area;
+
 })
 //3. pagination選擇事件
 const pagination = document.querySelector('.pagination');
@@ -184,4 +212,6 @@ pagination.addEventListener('click',function(e){
     console.log(3);
   }
 })
+
+
 
