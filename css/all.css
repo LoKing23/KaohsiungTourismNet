@@ -60,6 +60,11 @@ img {
   background-color: #fff;
 }
 
+.rotate-180 {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
 h1 {
   font-size: 40px;
 }
@@ -224,22 +229,18 @@ small {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
   padding: 16px;
-  -webkit-transition-property: height;
-  transition-property: height;
-  -webkit-transition-duration: 3s;
-          transition-duration: 3s;
+  height: 100px;
+  -webkit-transition: height 1s;
+  transition: height 1s;
 }
 
 .btn-group > * {
   margin-right: 16px;
   margin-bottom: 16px;
-}
-
-@media (max-width: 375px) {
-  .btn-group .btn {
-    width: 100%;
-  }
 }
 
 .btn {

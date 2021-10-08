@@ -54,7 +54,9 @@ img{
     background-color: #fff;
   }
 }
-
+.rotate-180{
+  transform: rotate(180deg);
+}
 
 h1{
   font-size: 40px;
@@ -175,15 +177,13 @@ small{
 .btn-group{
   display: flex;
   flex-wrap: wrap;
+  align-items: baseline;
   padding: 16px;
+  height: 100px;
+  transition: height 1s;
   >*{
    margin-right: 16px; 
    margin-bottom: 16px;
-  }
-  .btn{
-    @media(max-width:375px){
-      width: 100%;
-    }
   }
 }
 .btn{

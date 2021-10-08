@@ -18,8 +18,6 @@ function init(){
 
 // 選擇行政區(selector/button)->data挑出該行政區組成陣列->從陣列中挑出需用資料（景點名稱-Name、行政區（用filter()撈Add符合行政區)、開館時間-Opentime、地址Add、電話Tel）->根據數量組成最多六個景點其他要點擊下一頁時替換
 //資料data、事件event、畫面view
-
-
 //data
 //1 撈出同區data，組成陣列並回傳
 function mapData(area){
@@ -265,8 +263,23 @@ pagination.addEventListener('click',function(e){
 //4. 下拉btn事件
 const dashlineImg = document.querySelector('.dashline-img-middle img');
 dashlineImg.addEventListener('click',function(e){
-  
+  //多一排按鈕（4顆)增加66px
   const btnGroup = document.querySelector('.btn-group');
+  const area = getAllAddressOfFilter();
+  const newAreaLen = area.length - 4;
+  if(btnGroup.style.height == '100px'){
+    let addHeight = (newAreaLen/4 + 1) * 66;
+    btnGroup.style.height = (100+addHeight) + 'px';
+  }else{
+    console.log('有進來');
+    btnGroup.style.overflow = 'hidden';
+    btnGroup.style.height = '100px';
+  }
+  this.classList.toggle('rotate-180');
+})
+//const btnGroup = document.querySelector('.btn-group');
+btnGroup.addEventListener('transitionend',function(e){
+  if(e.propertyName !== 'height') return;
   if(btnGroup.classList.contains('open')){
     btnGroup.classList.toggle('open');
     renderHotArea();
@@ -275,8 +288,6 @@ dashlineImg.addEventListener('click',function(e){
     btnGroup.classList.toggle('open');
     renderAllBtn();
   }
-  
-
 })
 
 
